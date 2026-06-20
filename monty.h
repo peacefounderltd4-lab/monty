@@ -5,12 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * struct stack_s - doubly linked list
- * @n: integer
- * @prev: previous
- * @next: next
- */
 typedef struct stack_s
 {
 	int n;
@@ -18,39 +12,25 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-/**
- * struct instruction_s - opcode mapping
- * @opcode: command
- * @f: function
- */
-typedef struct instruction_s
-{
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
-
 extern int mode;
 
 /* CORE */
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line);
+void pall(stack_t **stack, unsigned int line);
+void pint(stack_t **stack, unsigned int line);
+void pop(stack_t **stack, unsigned int line);
+void swap(stack_t **stack, unsigned int line);
+void add(stack_t **stack, unsigned int line);
+void nop(stack_t **stack, unsigned int line);
 
 /* ADVANCED */
-void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack, unsigned int line_number);
-void rotl(stack_t **stack, unsigned int line_number);
-void rotr(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line);
+void pstr(stack_t **stack, unsigned int line);
+void rotl(stack_t **stack, unsigned int line);
+void rotr(stack_t **stack, unsigned int line);
 
 /* MODE */
-void _stack(stack_t **stack, unsigned int line_number);
-void _queue(stack_t **stack, unsigned int line_number);
-
-/* EXEC */
-void execute(char *line, stack_t **stack, unsigned int line);
+void _stack(stack_t **stack, unsigned int line);
+void _queue(stack_t **stack, unsigned int line);
 
 #endif
