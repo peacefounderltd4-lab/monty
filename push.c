@@ -2,7 +2,7 @@
 
 /**
  * is_integer - checks if a string is an integer
- * @str: string to check
+ * @str: string
  *
  * Return: 1 if integer, 0 otherwise
  */
@@ -30,8 +30,8 @@ int is_integer(char *str)
 }
 
 /**
- * push - pushes a new node
- * @stack: pointer to the stack
+ * push - pushes a value onto the stack
+ * @stack: pointer to stack
  * @line_number: line number
  */
 void push(stack_t **stack, unsigned int line_number)
@@ -66,10 +66,6 @@ void push(stack_t **stack, unsigned int line_number)
 		return;
 	}
 
-	/*
-	 * STACK mode = LIFO
-	 * New element becomes the top.
-	 */
 	if (stack_mode_flag == 0)
 	{
 		new_node->next = *stack;
@@ -78,10 +74,6 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		/*
-		 * QUEUE mode = FIFO
-		 * New element goes to the end.
-		 */
 		current = *stack;
 
 		while (current->next != NULL)
