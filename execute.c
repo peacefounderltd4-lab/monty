@@ -1,34 +1,45 @@
 #include "monty.h"
 
 /**
- * execute_file - executes a Monty file
- * @file: file containing instructions
+ * execute_file - executes a Monty bytecode file
+ * @file: file containing Monty instructions
  *
  * Return: nothing
  */
 void execute_file(FILE *file)
 {
-	char *line;
+	char *line = NULL;
 	char *opcode;
-	size_t buffer_size;
+	size_t len = 0;
 	ssize_t read;
-	unsigned int line_number;
-	stack_t *stack;
+	unsigned int line_number = 0;
+	stack_t *stack = NULL;
 	void (*func)(stack_t **, unsigned int);
 
-	line = NULL;
-	buffer_size = 0;
-	line_number = 0;
-	stack = NULL;
-
-	while ((read = getline(&line, &buffer_size, file)) != -1)
+	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
 
+		/* Remove newline */
 		if (read > 0 && line[read - 1] == '\n')
 			line[read - 1] = '\0';
 
-		opcode = strtok(line, " \t");
+		/*
+		 * Find first non-space character.
+		 * If it is '#', the whole line is a comment.
+		 */
+		opcode = line;
+
+		while (*opcode == ' ' || *opcode == '\t')
+			opcode++;
+
+		if (*opcode == '\0')
+			continue;
+
+		if (*opcode == '#')
+			continue;
+
+		opcode = strtok(opcode, " \t");
 
 		if (opcode == NULL)
 			continue;
