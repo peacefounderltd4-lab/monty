@@ -1,9 +1,9 @@
 #include "monty.h"
 
 /**
- * add - adds the top two elements of the stack
- * @stack: pointer to the stack
- * @line_number: line number of the instruction
+ * add - adds the top two elements
+ * @stack: pointer to stack
+ * @line_number: line number
  */
 void add(stack_t **stack, unsigned int line_number)
 {
@@ -16,7 +16,8 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 
 	top = *stack;
-	top->next->n += top->n;
+
+	top->next->n = top->n + top->next->n;
 
 	*stack = top->next;
 	(*stack)->prev = NULL;
