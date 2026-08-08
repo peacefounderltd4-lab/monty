@@ -2,9 +2,9 @@
 
 /**
  * get_op_func - selects the function for an opcode
- * @opcode: opcode
+ * @opcode: opcode to search for
  *
- * Return: pointer to the appropriate function, or NULL
+ * Return: pointer to function, or NULL
  */
 void (*get_op_func(char *opcode))(stack_t **, unsigned int)
 {
@@ -20,6 +20,12 @@ void (*get_op_func(char *opcode))(stack_t **, unsigned int)
 		{"div", div_op},
 		{"mul", mul},
 		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
+		{"stack", stack_mode},
+		{"queue", queue_mode},
 		{NULL, NULL}
 	};
 	int i;
