@@ -10,6 +10,7 @@
 int main(int argc, char **argv)
 {
 	FILE *file;
+	char *extension;
 
 	if (argc != 2)
 	{
@@ -25,7 +26,13 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	execute_file(file);
+	extension = strrchr(argv[1], '.');
+
+	if (extension != NULL && strcmp(extension, ".bf") == 0)
+		execute_brainfuck(file);
+	else
+		execute_file(file);
+
 	fclose(file);
 
 	return (EXIT_SUCCESS);
