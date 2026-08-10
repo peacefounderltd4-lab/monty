@@ -4,8 +4,8 @@
 #include <string.h>
 
 /**
- * execute_file - executes a Monty file
- * @file: file containing instructions
+ * execute_file - executes Monty bytecode
+ * @file: file containing Monty instructions
  *
  * Return: nothing
  */
@@ -32,7 +32,7 @@ void execute_file(FILE *file)
 		while (*opcode == ' ' || *opcode == '\t')
 			opcode++;
 
-		/* Ignore empty lines and comments */
+		/* Empty line or comment */
 		if (*opcode == '\0' || *opcode == '#')
 			continue;
 
@@ -57,4 +57,25 @@ void execute_file(FILE *file)
 
 	free(line);
 	free_stack(stack);
+}
+
+
+/**
+ * execute_brainfuck - executes a Brainfuck file
+ * @file: Brainfuck file
+ *
+ * Return: nothing
+ */
+void execute_brainfuck(FILE *file)
+{
+	char *line = NULL;
+	size_t buffer_size = 0;
+	ssize_t read;
+
+	while ((read = getline(&line, &buffer_size, file)) != -1)
+	{
+		(void)read;
+	}
+
+	free(line);
 }
