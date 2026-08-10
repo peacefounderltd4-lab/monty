@@ -11,8 +11,6 @@
  * @n: integer
  * @prev: points to the previous element
  * @next: points to the next element
- *
- * Description: doubly linked list node structure
  */
 typedef struct stack_s
 {
@@ -40,8 +38,7 @@ extern int brainfuck_mode;
 void execute_file(FILE *file);
 void execute_brainfuck(FILE *file);
 
-/* Stack functions */
-void free_stack(stack_t *stack);
+/* Stack operations */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -54,11 +51,18 @@ void div_op(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
-/* Queue functions */
+/* Advanced opcodes */
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+
+/* Stack / queue modes */
+void stack_mode(stack_t **stack, unsigned int line_number);
 void queue_mode(stack_t **stack, unsigned int line_number);
 
-/* Brainfuck functions */
-void execute_brainfuck(FILE *file);
+/* Memory */
+void free_stack(stack_t *stack);
 
 /* Helpers */
 void (*get_op_func(char *opcode))(stack_t **, unsigned int);
