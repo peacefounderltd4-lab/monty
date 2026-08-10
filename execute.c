@@ -1,3 +1,8 @@
+#include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 /**
  * execute_file - executes a Monty file
  * @file: file containing instructions
@@ -6,18 +11,13 @@
  */
 void execute_file(FILE *file)
 {
-	char *line;
+	char *line = NULL;
 	char *opcode;
-	size_t buffer_size;
+	size_t buffer_size = 0;
 	ssize_t read;
-	unsigned int line_number;
-	stack_t *stack;
+	unsigned int line_number = 0;
+	stack_t *stack = NULL;
 	void (*func)(stack_t **, unsigned int);
-
-	line = NULL;
-	buffer_size = 0;
-	line_number = 0;
-	stack = NULL;
 
 	while ((read = getline(&line, &buffer_size, file)) != -1)
 	{
@@ -26,12 +26,13 @@ void execute_file(FILE *file)
 		if (read > 0 && line[read - 1] == '\n')
 			line[read - 1] = '\0';
 
-		/* Ignore empty lines and comments */
 		opcode = line;
 
+		/* Skip spaces and tabs */
 		while (*opcode == ' ' || *opcode == '\t')
 			opcode++;
 
+		/* Ignore empty lines and comments */
 		if (*opcode == '\0' || *opcode == '#')
 			continue;
 
