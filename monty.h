@@ -4,8 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
+#include <ctype.h>
 
+/**
+ * struct stack_s - doubly linked list representation of a stack
+ * @n: integer
+ * @prev: points to the previous element
+ * @next: points to the next element
+ *
+ * Description: doubly linked list node structure
+ */
 typedef struct stack_s
 {
 	int n;
@@ -13,14 +21,27 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+/**
+ * struct instruction_s - opcode and its function
+ * @opcode: opcode
+ * @f: function to handle the opcode
+ */
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/* Global variables */
 extern int stack_mode_flag;
+extern int brainfuck_mode;
 
+/* Main execution functions */
+void execute_file(FILE *file);
+void execute_brainfuck(FILE *file);
+
+/* Stack functions */
+void free_stack(stack_t *stack);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -33,16 +54,14 @@ void div_op(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
-void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack, unsigned int line_number);
-void rotl(stack_t **stack, unsigned int line_number);
-void rotr(stack_t **stack, unsigned int line_number);
-void stack_mode(stack_t **stack, unsigned int line_number);
+/* Queue functions */
 void queue_mode(stack_t **stack, unsigned int line_number);
 
-void execute_file(FILE *file);
-void free_stack(stack_t *stack);
+/* Brainfuck functions */
+void execute_brainfuck(FILE *file);
+
+/* Helpers */
 void (*get_op_func(char *opcode))(stack_t **, unsigned int);
 int is_integer(char *str);
 
-#endif
+#endif /* MONTY_H */
