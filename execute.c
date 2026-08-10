@@ -1,5 +1,3 @@
-#include "monty.h"
-
 /**
  * execute_file - executes a Monty file
  * @file: file containing instructions
